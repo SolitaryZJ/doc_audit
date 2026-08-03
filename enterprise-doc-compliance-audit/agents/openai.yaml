@@ -1,0 +1,3 @@
+display_name: Enterprise Document Compliance Audit
+short_description: Audit DOCX files against traceable, user-provided regulation packs.
+default_prompt: Review this DOCX against the supplied jurisdiction and regulation pack, then produce a cited Markdown/JSON report and an annotated copy when safe.
