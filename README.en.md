@@ -12,6 +12,7 @@ An open-source Codex skill for reviewing enterprise documents against versioned,
 - Stable paragraph/table indexes and text hashes for DOCX evidence
 - Optional highlighted DOCX copy without overwriting the source
 - Local-first processing with configurable official-source lookup
+- Local SQLite FTS5 RAG retrieves relevant rules per document section instead of loading the full corpus into context
 
 ## Install with npx
 
@@ -45,6 +46,8 @@ Use enterprise-doc-compliance-audit to review this DOCX and produce a report and
 
 ```bash
 python -m pip install python-docx
+python enterprise-doc-compliance-audit/scripts/build_index.py regulation-pack.json regulations.db
+python enterprise-doc-compliance-audit/scripts/retrieve.py regulations.db "personal data retention" --k 5
 python enterprise-doc-compliance-audit/scripts/extract_docx.py input.docx -o extracted.json
 python enterprise-doc-compliance-audit/scripts/annotate_docx.py input.docx annotated.docx findings.json
 python enterprise-doc-compliance-audit/scripts/validate_report.py report.json

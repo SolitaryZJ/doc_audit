@@ -12,6 +12,7 @@
 - 提取 DOCX 段落与表格，保留稳定索引和文本哈希
 - 复制原文件后生成可选的 DOCX 高亮标注，不覆盖源文件
 - 默认本地优先；联网只应访问用户配置的官方来源
+- 使用本地 SQLite FTS5 RAG 按段落召回法规，避免把完整法规库塞入上下文
 
 ## 使用 npx 安装
 
@@ -45,6 +46,8 @@ C:\Users\<用户名>\.codex\skills\enterprise-doc-compliance-audit\
 
 ```bash
 python -m pip install python-docx
+python enterprise-doc-compliance-audit/scripts/build_index.py regulation-pack.json regulations.db
+python enterprise-doc-compliance-audit/scripts/retrieve.py regulations.db "个人信息保存期限" --k 5
 python enterprise-doc-compliance-audit/scripts/extract_docx.py input.docx -o extracted.json
 python enterprise-doc-compliance-audit/scripts/annotate_docx.py input.docx annotated.docx findings.json
 python enterprise-doc-compliance-audit/scripts/validate_report.py report.json
