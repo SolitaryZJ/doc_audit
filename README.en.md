@@ -13,6 +13,7 @@ An open-source Codex skill for reviewing enterprise documents against versioned,
 - Optional highlighted DOCX copy without overwriting the source
 - Local-first processing with configurable official-source lookup
 - Local SQLite FTS5 RAG retrieves relevant rules per document section instead of loading the full corpus into context
+- `sentence-transformers` embeddings provide semantic retrieval for regulation clauses
 
 ## Install with npx
 
@@ -46,6 +47,9 @@ Use enterprise-doc-compliance-audit to review this DOCX and produce a report and
 
 ```bash
 python -m pip install python-docx
+python -m pip install sentence-transformers numpy
+python enterprise-doc-compliance-audit/scripts/build_vector_index.py regulation-pack.json regulations.vec.db
+python enterprise-doc-compliance-audit/scripts/retrieve_vector.py regulations.vec.db "personal data retention" --k 5
 python enterprise-doc-compliance-audit/scripts/build_index.py regulation-pack.json regulations.db
 python enterprise-doc-compliance-audit/scripts/retrieve.py regulations.db "personal data retention" --k 5
 python enterprise-doc-compliance-audit/scripts/extract_docx.py input.docx -o extracted.json

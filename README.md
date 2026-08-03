@@ -13,6 +13,7 @@
 - 复制原文件后生成可选的 DOCX 高亮标注，不覆盖源文件
 - 默认本地优先；联网只应访问用户配置的官方来源
 - 使用本地 SQLite FTS5 RAG 按段落召回法规，避免把完整法规库塞入上下文
+- 使用 sentence-transformers 生成法规 embedding，并对文档段落执行语义召回
 
 ## 使用 npx 安装
 
@@ -46,6 +47,9 @@ C:\Users\<用户名>\.codex\skills\enterprise-doc-compliance-audit\
 
 ```bash
 python -m pip install python-docx
+python -m pip install sentence-transformers numpy
+python enterprise-doc-compliance-audit/scripts/build_vector_index.py regulation-pack.json regulations.vec.db
+python enterprise-doc-compliance-audit/scripts/retrieve_vector.py regulations.vec.db "个人信息保存期限" --k 5
 python enterprise-doc-compliance-audit/scripts/build_index.py regulation-pack.json regulations.db
 python enterprise-doc-compliance-audit/scripts/retrieve.py regulations.db "个人信息保存期限" --k 5
 python enterprise-doc-compliance-audit/scripts/extract_docx.py input.docx -o extracted.json
