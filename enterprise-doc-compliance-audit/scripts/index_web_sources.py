@@ -18,4 +18,4 @@ def index_sources(source_path, db_path, model_name):
     con.commit(); con.close()
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(); p.add_argument('sources'); p.add_argument('index'); p.add_argument('--model',default='all-MiniLM-L6-v2'); a=p.parse_args(); index_sources(a.sources,a.index,a.model)
+    p=argparse.ArgumentParser(); p.add_argument('sources'); p.add_argument('index'); p.add_argument('--model',default='BAAI/bge-m3'); a=p.parse_args(); index_sources(a.sources,a.index,a.model)

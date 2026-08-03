@@ -13,4 +13,4 @@ def retrieve(db_path, query, k, model_name):
     return [item for _,item in hits[:k]]
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(); p.add_argument('index'); p.add_argument('query'); p.add_argument('-k',type=int,default=5); p.add_argument('--model',default='all-MiniLM-L6-v2'); a=p.parse_args(); print(json.dumps(retrieve(a.index,a.query,a.k,a.model),ensure_ascii=False,indent=2))
+    p=argparse.ArgumentParser(); p.add_argument('index'); p.add_argument('query'); p.add_argument('-k',type=int,default=5); p.add_argument('--model',default='BAAI/bge-m3'); a=p.parse_args(); print(json.dumps(retrieve(a.index,a.query,a.k,a.model),ensure_ascii=False,indent=2))

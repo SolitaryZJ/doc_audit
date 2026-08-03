@@ -15,4 +15,4 @@ def build(pack_path, db_path, model_name):
     con.commit(); con.close()
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(); p.add_argument('pack'); p.add_argument('index'); p.add_argument('--model',default='all-MiniLM-L6-v2'); a=p.parse_args(); build(a.pack,a.index,a.model)
+    p=argparse.ArgumentParser(); p.add_argument('pack'); p.add_argument('index'); p.add_argument('--model',default='BAAI/bge-m3'); a=p.parse_args(); build(a.pack,a.index,a.model)

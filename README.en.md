@@ -13,7 +13,7 @@ An open-source Codex skill for reviewing enterprise documents against versioned,
 - Optional highlighted DOCX copy without overwriting the source
 - Local-first processing with configurable official-source lookup
 - Local SQLite FTS5 RAG retrieves relevant rules per document section instead of loading the full corpus into context
-- `sentence-transformers` embeddings provide semantic retrieval for regulation clauses
+- Chinese-friendly `BAAI/bge-m3` embeddings provide semantic retrieval for regulation clauses
 
 ## Install with npx
 
