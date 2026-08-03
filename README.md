@@ -47,6 +47,78 @@ enterprise-doc-compliance-audit/
 
    `Use enterprise-doc-compliance-audit to review contract.docx for CN finance, and produce both the report and an annotated copy.`
 
+## Install with npx / 使用 npx 安装
+
+如果你的 Codex 客户端支持 `skills` CLI，可以直接从 GitHub 安装：
+
+```bash
+npx skills add SolitaryZJ/doc_audit
+```
+
+仓库包含多个目录时，指定 skill：
+
+```bash
+npx skills add SolitaryZJ/doc_audit --skill enterprise-doc-compliance-audit
+```
+
+验证安装：
+
+```bash
+npx skills list
+```
+
+If your Codex-compatible client supports the `skills` CLI, install directly from GitHub:
+
+```bash
+npx skills add SolitaryZJ/doc_audit
+```
+
+For repositories containing multiple skills, select this skill explicitly:
+
+```bash
+npx skills add SolitaryZJ/doc_audit --skill enterprise-doc-compliance-audit
+```
+
+Then verify it with:
+
+```bash
+npx skills list
+```
+
+## Add to Codex manually / 手动加入 Codex
+
+将整个 `enterprise-doc-compliance-audit` 目录复制到 Codex skills 目录：
+
+```text
+<CODEX_HOME>/skills/enterprise-doc-compliance-audit/
+```
+
+Windows 默认位置通常是：
+
+```text
+C:\Users\<用户名>\.codex\skills\enterprise-doc-compliance-audit\
+```
+
+也可以使用环境变量指定位置：
+
+```bash
+%CODEX_HOME%\skills\enterprise-doc-compliance-audit\
+```
+
+确认目录中存在 `SKILL.md`，然后重新打开 Codex 或刷新 skills 列表。安装完成后，可直接说：
+
+```text
+使用 enterprise-doc-compliance-audit 审核这个 DOCX，并生成报告和标注副本。
+```
+
+Copy the complete `enterprise-doc-compliance-audit` directory into:
+
+```text
+<CODEX_HOME>/skills/enterprise-doc-compliance-audit/
+```
+
+Make sure `SKILL.md` is present, then restart Codex or refresh its skills list.
+
 ### Local script usage / 本地脚本
 
 ```bash
