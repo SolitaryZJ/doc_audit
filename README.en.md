@@ -59,6 +59,25 @@ python enterprise-doc-compliance-audit/scripts/validate_report.py report.json
 
 See [`regulation-pack-schema.md`](enterprise-doc-compliance-audit/references/regulation-pack-schema.md) for the regulation-pack format.
 
+## RAG review flow
+
+1. Split local regulation packs by clause and embed them at ingest time into a local SQLite vector index.
+2. Search only configured official domains; clean pages into clause chunks and retain URL, issuer, effective date, retrieval date, and locator.
+3. Add web chunks to the same vector index with `index_web_sources.py`; mark their source as `official_web`.
+4. Split DOCX paragraphs and tables; create temporary query embeddings per review unit and do not persist enterprise-document vectors by default.
+5. Combine semantic and keyword retrieval, filter by jurisdiction, industry, and effective date, then pass only Top-K clauses to the model context.
+6. Cite every conclusion; mark unverifiable sources or locations for human review.
+
+Example web-chunk input:
+
+```json
+[{"text":"Clause text","title":"Official rule","url":"https://official.example/rule","issuer":"Authority","jurisdiction":"CN","effective_date":"2025-01-01","retrieved_at":"2026-08-03","locator":"Article 13"}]
+```
+
+```bash
+python enterprise-doc-compliance-audit/scripts/index_web_sources.py web_chunks.json regulations.vec.db
+```
+
 ## Safety and scope
 
 This project provides assistive review, not legal advice, and does not guarantee completeness. Users are responsible for maintaining regulation packs. Uncertain evidence, applicability, or text matching must be sent for human review. Do not upload enterprise documents to unconfigured services or expose sensitive excerpts in logs.

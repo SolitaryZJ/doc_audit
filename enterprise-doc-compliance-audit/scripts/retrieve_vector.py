@@ -9,7 +9,7 @@ def retrieve(db_path, query, k, model_name):
     for row in con.execute('SELECT * FROM vector_rules WHERE model=?',(model_name,)):
         v=np.frombuffer(row['vector'],dtype='float32'); hits.append((float(np.dot(q,v)),dict(row)))
     con.close(); hits.sort(key=lambda x:x[0],reverse=True)
-    for score,item in hits[:k]: item.pop('vector',None); item['score']=score
+    for score,item in hits[:k]: item.pop('vector',None); item['score']=score; item.pop('model',None)
     return [item for _,item in hits[:k]]
 
 if __name__=='__main__':
